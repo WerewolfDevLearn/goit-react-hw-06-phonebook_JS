@@ -1,11 +1,13 @@
-// import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
+import { getContacts } from '../redux/contacts/contacts-selectors';
 import AppStl from './App.module.css';
 
-function App({ contacts }) {
+export default function App() {
+  const contacts = useSelector(getContacts);
+
   return (
     <div className={AppStl.container}>
       <h2 className={AppStl.heading}>PhoneBook</h2>
@@ -18,11 +20,3 @@ function App({ contacts }) {
     </div>
   );
 }
-
-const mapStateToProps = state => {
-  return {
-    contacts: state.contacts.items,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
